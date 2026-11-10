@@ -9,7 +9,8 @@ import {
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
-// Authentication
+// Public pages
+import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 
@@ -43,16 +44,17 @@ function App() {
         <Routes>
 
           {/* PUBLIC ROUTES */}
-          <Route
-            path="/"
-            element={<Navigate to="/login" replace />}
-          />
 
+          {/* Landing Home Page */}
+          <Route path="/" element={<Home />} />
+
+          {/* Authentication */}
           <Route path="/login" element={<Login />} />
-
           <Route path="/register" element={<Register />} />
 
+
           {/* ADMIN ROUTES */}
+
           <Route
             element={
               <ProtectedRoute allowedRoles={["admin"]} />
@@ -103,7 +105,9 @@ function App() {
             </Route>
           </Route>
 
+
           {/* STUDENT ROUTES */}
+
           <Route
             element={
               <ProtectedRoute allowedRoles={["student"]} />
@@ -149,10 +153,12 @@ function App() {
             </Route>
           </Route>
 
-          {/* FALLBACK */}
+
+          {/* FALLBACK ROUTE */}
+
           <Route
             path="*"
-            element={<Navigate to="/login" replace />}
+            element={<Navigate to="/" replace />}
           />
 
         </Routes>
